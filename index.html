@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>I Love You</title>
     <style>
         body {
@@ -22,17 +22,18 @@
         
         .container {
             max-width: 800px;
-            padding: 2rem;
+            padding: 1rem;
+            width: 90%;
         }
         
         h1 {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         p {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 4vw, 1.5rem);
             line-height: 1.6;
             margin-bottom: 1.5rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -40,8 +41,8 @@
         
         .image-container {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: min(220px, 70vw);
+            height: min(220px, 70vw);
             margin: 2rem auto;
             animation: pulse 2s infinite alternate;
         }
@@ -165,8 +166,8 @@
             const left = Math.random() * 100;
             const top = Math.random() * 100;
             
-            // Random size
-            const size = Math.random() * 30 + 50;
+            // Random size (smaller on mobile)
+            const size = Math.min(window.innerWidth / 6, Math.random() * 30 + 50);
             
             // Random animation delay
             const delay = Math.random() * 5;
@@ -187,6 +188,8 @@
             setTimeout(() => {
                 this.style.position = 'fixed';
                 this.style.zIndex = '1000';
+                this.style.width = 'min(150px, 40vw)';
+                this.style.height = 'min(150px, 40vw)';
                 animateCrazy(this);
             }, 500);
         });
